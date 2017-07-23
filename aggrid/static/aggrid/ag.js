@@ -8,23 +8,19 @@ var columnDefs = [
                                 if ( filterLocalDateAtMidnight.getTime() == cellDate.getTime()){
                                     return 0
                                 }
-
                                 if (cellDate < filterLocalDateAtMidnight ){
                                     return -1;
-
                                 }
-
                                 if (cellDate > filterLocalDateAtMidnight){
                                     return 1;
-                                }
-                                }
+                                }}
 
                             }
                         },
 
 
 
-                        {headerName: 'id', field: 'id',valueGetter: function(params){
+                        /*{headerName: 'id', field: 'id',valueGetter: function(params){
                             if (selectedCount =="id"){
                                 return params.data.id;
                             }
@@ -32,8 +28,33 @@ var columnDefs = [
 
                             return params.data.cg_fees;
                         }}
-                        }                    
-                    ];
+                        } */                   
+                        {headerName:"Id", field:"id"},
+                        {headerName:"Status", field:"status"},
+                        {headerName:"Cust_Id", field:"cust_id"},
+                        {headerName:"Cust_Name", field:"cust_name"},
+                        {headerName:"Cg_Id", field:"cg_id"},
+                        {headerName:"Cg_Name", field:"cg_name"},
+                        {headerName:"Service", field:"service"},
+                        {headerName:"Charge_Fee", field:"charge_fee"},
+                        {headerName:"Charge_Equip_Rent", field:"charge_equip_rent"},
+                        {headerName:"Charge_Travel_A", field:"charge_travel_a"},
+                        {headerName:"Charge_Consumable_A", field:"charge_consumable_a"},
+                        {headerName:"Charge_Other_A", field:"charge_other_a"},
+                        {headerName:"Pay_Fee As Cg_Fees", field:"pay_fee as cg_fees"},
+                        {headerName:"Pay_Travel_A", field:"pay_travel_a"},
+                        {headerName:"Pay_Consumable_A", field:"pay_consumable_a"},
+                        {headerName:"Pay_Other_A", field:"pay_other_a"},
+                        {headerName:"Penalty", field:"penalty"},
+                        {headerName:"Discount", field:"discount"},
+                        {headerName:"Duration", field:"duration"},
+                        {headerName:"Duty_Shift", field:"duty_shift"},
+                        {headerName:"Closing_Balance", field:"closing_balance"},
+                        {headerName:"Discount_Value", field:"discount_value"},
+                        {headerName:"Code", field:"code"},
+                        {headerName:"Booking_Id", field:"booking_id"},
+                        {headerName:"City", field:"city"},
+                        ];
 
 var gridOptions = {
                     floatingFilter:true,

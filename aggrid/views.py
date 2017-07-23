@@ -36,8 +36,8 @@ latest_visits = ("""
 					when curr_status = '-9' then 'Bad Cust Cancelled MISSEDCALL'
 					when curr_status = '-10' then 'Bad Prov Cancelled IVR'
 					when curr_status = '4' then 'Paid Leave' else 'unknown' end ) as status,
-					umc.id,umc.first_name,
-					umc.last_name,umcp.id,umcp.first_name,umcp.last_name,
+					umc.id as cust_id,umc.first_name||' '||coalesce(umc.last_name,'') as cust_name,
+					umcp.id cg_id,umcp.first_name||' '||coalesce(umcp.last_name,'') as cg_name,
 					(case when rbb.service = 'N' then 'Nurse Sister+Brother'
 					when rbb.service = 'A' then 'Attendant Aaya+Wardboy'
 					when rbb.service = 'P' then 'Physiotherapist'
@@ -55,7 +55,7 @@ latest_visits = ("""
 					when rbb.service = 'D' then 'Diagnostics'
 					when rbb.service = 'Py' then 'Physician'
 					 else 'Unknown'
-					 end) ,to_char(date_time+interval'5:30','dd/mm/yyyy') as date, charge_fee,
+					 end) service ,to_char(date_time+interval'5:30','dd/mm/yyyy') as date, charge_fee,
 					charge_equip_rent,
 					charge_travel_a,
 					charge_consumable_a,
@@ -69,8 +69,9 @@ latest_visits = ("""
 					discount,rbc.duration,(case when duty_shift = '1' then 'Day'
 					when duty_shift = '2' then 'Night'
 					when duty_shift = '3' then '24-Hour'
-					when duty_shift = '4' then 'Intervention' else null end) duty_shift,closing_balance,discount_value,code,rbb.id,
-					(case when region_id  = 2 then 'delhi' else 'mumbai' end)
+					when duty_shift = '4' then 'Intervention' else null end) duty_shift,closing_balance,discount_value,code,rbb.id as booking_id,
+					(case when region_id  = 2 then 'delhi' else 'mumbai' end) as city
+
 
 					 from "RequestBooking_booking" rbb
 					join "UserManagement_c24patient" ump on rbb.patient_id = ump.id 
@@ -84,7 +85,7 @@ latest_visits = ("""
 					left join  "Discounts_discountmaster"  ddm on rbc.discount_id = ddm.id 
 					join "Geography_careaddress" gca on rbc.address_id = gca.id
 					join  "Geography_city" gc on gca.city_id =gc.id
-					where(date_time at time zone 'Asia/Calcutta')::date between '2017-01-01' and '2017-01-31'
+					where(date_time at time zone 'Asia/Calcutta')::date between '2017-04-01' and '2017-04-30'
 					order by date_time 
 					""")
 
