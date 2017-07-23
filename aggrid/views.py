@@ -55,7 +55,7 @@ latest_visits = ("""
 					when rbb.service = 'D' then 'Diagnostics'
 					when rbb.service = 'Py' then 'Physician'
 					 else 'Unknown'
-					 end) ,(date_time at time zone 'Asia/Calcutta')::date as date_time, charge_fee,
+					 end) ,to_char(date_time+interval'5:30','dd/mm/yyyy') as date, charge_fee,
 					charge_equip_rent,
 					charge_travel_a,
 					charge_consumable_a,
